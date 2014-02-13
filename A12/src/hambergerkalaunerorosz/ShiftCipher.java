@@ -14,14 +14,14 @@ public class ShiftCipher extends MonoalphabeticCipher {
 	 *            Der Wert um welchen das Alphabet verschoben werden soll.
 	 */
 	public ShiftCipher(int value) {
-		// Erstellt ein Alphabet das gleichbleibt um das Geheimalphabet überschreiben zu können
+		// Erstellt ein Alphabet das gleichbleibt um das Geheimalphabet Ã¼berschreiben zu kÃ¶nnen
 		char[] alphatrue = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
 				'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-				'w', 'x', 'y', 'z', 'ä', 'ö', 'ü', 'ß', 'a' };
+				'w', 'x', 'y', 'z', 'Ã¤', 'Ã¶', 'Ã¼', 'ÃŸ', 'a' };
 		// Das Geheimalphabet
 		char[] alpha = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
 				'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
-				'x', 'y', 'z', 'ä', 'ö', 'ü', 'ß' };
+				'x', 'y', 'z', 'Ã¤', 'Ã¶', 'Ã¼', 'ÃŸ' };
 
 		if (value < 0) {
 			throw new IllegalArgumentException(
@@ -38,7 +38,6 @@ public class ShiftCipher extends MonoalphabeticCipher {
 				alpha[i] = alphatrue[i + this.shiftAmount];
 			}
 		}
-
 		super.setSecretAlphabet(new String(alpha));
 
 	}
@@ -57,7 +56,7 @@ public class ShiftCipher extends MonoalphabeticCipher {
 	 * Verkleinert den angegebenen Wert. z.B: 33-->3
 	 * 
 	 * @param value
-	 * @return gekürzter int Wert
+	 * @return gekï¿½rzter int Wert
 	 */
 	private int reduceInt(int value) {
 		while (value > 29) {
@@ -73,7 +72,7 @@ public class ShiftCipher extends MonoalphabeticCipher {
 	 */
 	public static void main(String[] args) {
 		Cipher sc = new ShiftCipher(12);
-		String encrypted = sc.encrypt("abcdefghijklmnopqrstuvwxyzäöüß");
+		String encrypted = sc.encrypt("abcdefghijklmnopqrstuvwxyzÃ¤Ã¶Ã¼ÃŸ");
 		System.out.println(encrypted);
 		System.out.println(sc.decrypt(encrypted));
 	}

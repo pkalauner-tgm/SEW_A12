@@ -4,7 +4,7 @@ public class KeywordCipher extends MonoalphabeticCipher {
 	
 	public KeywordCipher(String keyword) {
 		
-        String keyfirst = keyword.toLowerCase().trim(); //Wandelt alle Buchstaben in Kleinbuschstaben um und entfernt führende und nachfolgende Leerzeichen.
+        String keyfirst = keyword.toLowerCase().trim(); //Wandelt alle Buchstaben in Kleinbuschstaben um und entfernt fÃ¼hrende und nachfolgende Leerzeichen.
 		String keywordtrue = ""; // Ausgabe
         for (int i = 0; i < keyfirst.length(); i++) {
             int count = 0;

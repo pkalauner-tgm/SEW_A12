@@ -10,13 +10,13 @@ public class MonoalphabeticCipher implements Cipher {
 	private String secretAlphabet;
 	private char[] alpha = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
 			'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
-			'x', 'y', 'z', 'ä', 'ö', 'ü', 'ß' };
+			'x', 'y', 'z', 'Ã¤', 'Ã¶', 'Ã¼', 'ÃŸ' };
 
 	/**
 	 * Default Konstruktor Geheimalphabet wird auf das Ausgangsalphabet gesetzt
 	 */
 	public MonoalphabeticCipher() {
-		this.secretAlphabet = "abcdefghijklmnopqrstuvwxyzäöüß";
+		this.secretAlphabet = "abcdefghijklmnopqrstuvwxyzÃ¤Ã¶Ã¼ÃŸ";
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class MonoalphabeticCipher implements Cipher {
 	}
 
 	/**
-	 * Liefert das Geheimalphabet zurück
+	 * Liefert das Geheimalphabet zurÃ¼ck
 	 * 
 	 * @return secretAlphabet
 	 */
@@ -59,21 +59,21 @@ public class MonoalphabeticCipher implements Cipher {
 		for (int i = 0; i < arrText.length; i++) {
 			if (arrText[i] >= 'a' && arrText[i] <= 'z') {
 				// [arrText[i] - 'a' berechnet die Stelle des Buchstabens im Alphabet (bzw.im char-Array)
-				// Danach wird der aktuelle Buchstabe auf den dazugehörigen des Geheimalphabet gesetzt
+				// Danach wird der aktuelle Buchstabe auf den dazugehÃ¶rigen des Geheimalphabet gesetzt
 				arrText[i] = arrSecretAlp[arrText[i] - 'a'];
 			} else {
-				//Umlaute müssen seperat behandelt werden, da die ASCII Codes nicht direkt nach dem normalen Alphabet liegen.
+				//Umlaute mÃ¼ssen seperat behandelt werden, da die ASCII Codes nicht direkt nach dem normalen Alphabet liegen.
 				switch (arrText[i]) {
-				case 'ä':
+				case 'Ã¤':
 					arrText[i] = arrSecretAlp[26];
 					break;
-				case 'ö':
+				case 'Ã¶':
 					arrText[i] = arrSecretAlp[27];
 					break;
-				case 'ü':
+				case 'Ã¼':
 					arrText[i] = arrSecretAlp[28];
 					break;
-				case 'ß':
+				case 'ÃŸ':
 					arrText[i] = arrSecretAlp[29];
 					break;
 				default:
@@ -91,9 +91,9 @@ public class MonoalphabeticCipher implements Cipher {
 		char[] arrText = text.toLowerCase().toCharArray();
 
 		for (int i = 0; i < arrText.length; i++) {
-			if ((arrText[i] >= 'a' && arrText[i] <= 'z') || arrText[i] == 'ä' || arrText[i] == 'ö' || arrText[i] == 'ü' || arrText[i] == 'ß') {
+			if ((arrText[i] >= 'a' && arrText[i] <= 'z') || arrText[i] == 'Ã¤' || arrText[i] == 'Ã¶' || arrText[i] == 'Ã¼' || arrText[i] == 'ÃŸ') {
 				// Diesmal  wird mittels indexOf() die Stelle im Geheimalphabet herausgefunden, da ja diesmal die Reihenfolge nicht bekannt ist.
-				// Danach wird der aktuelle Buchstabe auf den dazugehörigen des Original-Alphabets gesetzt
+				// Danach wird der aktuelle Buchstabe auf den dazugehÃ¶rigen des Original-Alphabets gesetzt
 				arrText[i] = alpha[secretAlphabet.indexOf(arrText[i])];
 			}
 		}
