@@ -28,7 +28,7 @@ public class SubstitutionCipher extends MonoalphabeticCipher {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		SubstitutionCipher sc = new SubstitutionCipher("bcdefghijklmnopqrstuvwxyzäöüßa");
+		Cipher sc = new SubstitutionCipher("bcdefghijklmnopqrstuvwxyzäöüßa");
 		String encrypted = sc.encrypt("abcdefghijklmnopqrstuvwxyzäöüß");
 		System.out.println(encrypted);
 		System.out.println(sc.decrypt(encrypted));
