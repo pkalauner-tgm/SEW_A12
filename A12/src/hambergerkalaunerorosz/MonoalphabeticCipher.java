@@ -10,33 +10,37 @@ public class MonoalphabeticCipher implements Cipher {
 	private String secretAlphabet;
 	private char[] alpha = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
 			'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
-			'x', 'y', 'z', 'Ã¤', 'Ã¶', 'Ã¼', 'ÃŸ' };
+			'x', 'y', 'z', 'ä', 'ö', 'ü', 'ß' };
 
 	/**
 	 * Default Konstruktor Geheimalphabet wird auf das Ausgangsalphabet gesetzt
 	 */
 	public MonoalphabeticCipher() {
-		this.secretAlphabet = "abcdefghijklmnopqrstuvwxyzÃ¤Ã¶Ã¼ÃŸ";
+		this.secretAlphabet = "abcdefghijklmnopqrstuvwxyzäöüß";
 	}
-	
+
 	/**
 	 * Konstruktor mit Definition des Geheimalphabets
-	 * @param secretAlphabet Geheimalphabet
+	 * 
+	 * @param secretAlphabet
+	 *            Geheimalphabet
 	 */
 	public MonoalphabeticCipher(String secretAlphabet) {
 		setSecretAlphabet(secretAlphabet);
 	}
-	
+
 	/**
 	 * Setzt das Geheimalphabet
-	 * @param secretAlphabet Geheimalphabet
+	 * 
+	 * @param secretAlphabet
+	 *            Geheimalphabet
 	 */
 	public void setSecretAlphabet(String secretAlphabet) {
 		this.secretAlphabet = secretAlphabet;
 	}
-	
+
 	/**
-	 * Liefert das Geheimalphabet zurÃ¼ck
+	 * Liefert das Geheimalphabet zurück
 	 * 
 	 * @return secretAlphabet
 	 */
@@ -53,13 +57,28 @@ public class MonoalphabeticCipher implements Cipher {
 		char[] arrSecretAlp = this.secretAlphabet.toCharArray();
 
 		for (int i = 0; i < arrText.length; i++) {
-			if (arrText[i] > 'a' && arrText[i] < 'z') {
+			if (arrText[i] >= 'a' && arrText[i] <= 'z') {
 				arrText[i] = arrSecretAlp[arrText[i] - 'a'];
+			} else {
+				switch (arrText[i]) {
+				case 'ä':
+					arrText[i] = arrSecretAlp[26];
+					break;
+				case 'ö':
+					arrText[i] = arrSecretAlp[27];
+					break;
+				case 'ü':
+					arrText[i] = arrSecretAlp[28];
+					break;
+				case 'ß':
+					arrText[i] = arrSecretAlp[29];
+					break;
+				default:
+				}
 			}
 		}
 		return new String(arrText);
 	}
-
 
 	/**
 	 * @see hambergerkalaunerorosz.Cipher
@@ -70,8 +89,19 @@ public class MonoalphabeticCipher implements Cipher {
 		char firstLetter = secretAlphabet.charAt(0);
 
 		for (int i = 0; i < arrText.length; i++) {
-			if (arrText[i] > 'a' && arrText[i] < 'z') {
-				arrText[i] = alpha[arrText[i] - firstLetter];
+			if (arrText[i] >= 'a' && arrText[i] <= 'z') {
+				int index = arrText[i] - firstLetter;
+				arrText[i] = alpha[index == -1 ? 29 : index];
+			} else {
+				switch (arrText[i]) {
+				case 'ä':
+				case 'ö':
+				case 'ü':
+				case 'ß':
+					arrText[i] = alpha[secretAlphabet.indexOf(arrText[i])];
+					break;
+				default:
+				}
 			}
 		}
 		return new String(arrText);

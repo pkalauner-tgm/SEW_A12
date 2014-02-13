@@ -9,11 +9,11 @@ package hambergerkalaunerorosz;
 public interface Cipher {
 
 	/**
-	 * VerschlÃ¼sselungsmethode
+	 * Verschlüsselungsmethode
 	 * 
 	 * @param text
-	 *            der zu verschlÃ¼sselnde Text
-	 * @return verschlÃ¼sselter Text
+	 *            der zu verschlüsselnde Text
+	 * @return verschlüsselter Text
 	 */
 	public String encrypt(String text);
 
@@ -21,8 +21,8 @@ public interface Cipher {
 	 * EntschlÃ¼sselungsmethode
 	 * 
 	 * @param text
-	 *            der zu entschlÃ¼sselnde Text
-	 * @return entschlÃ¼sselnter Text
+	 *            der zu entschlüsselnde Text
+	 * @return entschlüsselnter Text
 	 */
 	public String decrypt(String text);
 }

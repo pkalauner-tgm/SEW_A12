@@ -28,8 +28,8 @@ public class SubstitutionCipher extends MonoalphabeticCipher {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		SubstitutionCipher sc = new SubstitutionCipher("bcdefghijklmnopqrstuvwxyz√§√∂√º√üa");
-		String encrypted = sc.encrypt("Es funktioniert!!!");
+		SubstitutionCipher sc = new SubstitutionCipher("bcdefghijklmnopqrstuvwxyz‰ˆ¸ﬂa");
+		String encrypted = sc.encrypt("abcdefghijklmnopqrstuvwxyz‰ˆ¸ﬂ");
 		System.out.println(encrypted);
 		System.out.println(sc.decrypt(encrypted));
 	}
