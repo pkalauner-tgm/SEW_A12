@@ -40,8 +40,7 @@ public class View extends JFrame {
 	/**
 	 * Konstruktor der View Klasse
 	 * 
-	 * @param c
-	 *            Objekt der Control Klasse
+	 * @param c	Objekt der Control Klasse
 	 */
 
 	public View(Control c) {
