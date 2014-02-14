@@ -29,7 +29,17 @@ public class Control implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if (v.isEncr(e)) {
+			
+		}
+		
+		if (v.isDecr(e)) {
+			
+		}
+		
+		if (v.isOptionList(e)) {
+			v.setTextType();
+		}
 		
 	}
 }

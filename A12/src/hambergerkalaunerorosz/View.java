@@ -78,6 +78,7 @@ public class View extends JFrame {
 		this.encr = new JButton("Verschlüsseln");
 		this.decr = new JButton("Entschlüsseln");
 		
+		this.optionlist.addActionListener(c);
 		this.encr.addActionListener(c);
 		this.decr.addActionListener(c);
 
@@ -99,6 +100,21 @@ public class View extends JFrame {
 		this.setVisible(true);
 
 	}
+	
+	public void setTextType() {
+		switch (this.optionlist.getSelectedItem().toString()) {
+		case "Substitution":
+			this.type.setText("Geheimalphabet: ");
+			break;
+		case "Keyword":
+			this.type.setText("Keyword: ");
+			break;
+		case "Shift":
+			this.type.setText("Verschiebung: ");
+			break;
+			default:
+		}
+	}
 	/**
 	 * ActionListener des "Encrypt" Buttons
 	 * 
@@ -117,8 +133,22 @@ public class View extends JFrame {
 	 * @param e ActionEvent
 	 * @return	true falls gedrückt
 	 */
+	
 	public boolean isDecr(ActionEvent e){
 		if(e.getSource() == this.decr){
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Actionlistener des "Decrypt" Buttons
+	 * 
+	 * @param e ActionEvent
+	 * @return	true falls gedrückt
+	 */
+	public boolean isOptionList(ActionEvent e){
+		if(e.getSource() == this.optionlist){
 			return true;
 		}
 		return false;
