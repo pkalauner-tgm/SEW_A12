@@ -12,7 +12,7 @@ public class SubstitutionCipher extends MonoalphabeticCipher {
 	 * @param secretalphabet Geheimalphabet
 	 */
 	public SubstitutionCipher(String secretalphabet) {
-		super(secretalphabet);
+		this.setSecretAlphabet(secretalphabet);
 	}
 
 	/**
@@ -20,6 +20,9 @@ public class SubstitutionCipher extends MonoalphabeticCipher {
 	 * @param secretAlphabet Geheimalphabet
 	 */
 	public void setSecretAlphabet(String secretAlphabet) {
+		if (secretAlphabet.length() != 30) {
+			throw new IllegalArgumentException("Ungültiges Alphabet");
+		}
 		super.setSecretAlphabet(secretAlphabet);
 	}
 	

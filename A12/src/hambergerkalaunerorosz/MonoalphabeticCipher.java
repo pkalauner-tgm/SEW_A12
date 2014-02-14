@@ -16,7 +16,7 @@ public class MonoalphabeticCipher implements Cipher {
 	 * Default Konstruktor Geheimalphabet wird auf das Ausgangsalphabet gesetzt
 	 */
 	public MonoalphabeticCipher() {
-		this.secretAlphabet = "abcdefghijklmnopqrstuvwxyzäöüß";
+		setSecretAlphabet("abcdefghijklmnopqrstuvwxyzäöüß");
 	}
 
 	/**

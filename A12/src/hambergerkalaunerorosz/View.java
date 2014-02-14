@@ -4,12 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -21,8 +21,12 @@ import javax.swing.JTextField;
  * @version 20140212
  */
 public class View extends JFrame {
-	private Control c;
 
+	private static final long serialVersionUID = 1L;
+
+	private Control control;
+	private Cipher c;
+	
 	private JPanel buttons;
 	private JPanel center;
 	private JPanel north;
@@ -36,28 +40,29 @@ public class View extends JFrame {
 	private JTextArea output;
 
 	private JComboBox<String> optionlist;
-	
+
 	private JLabel type;
 
 	/**
 	 * Konstruktor der View Klasse
 	 * 
-	 * @param c	Objekt der Control Klasse
+	 * @param c
+	 *            Objekt der Control Klasse
 	 */
 
 	public View(Control c) {
-		this.c = c;
+		this.control = c;
 
 		this.setSize(800, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
+		this.setLocationRelativeTo(null);
 		this.setTitle("SuperCipher");
 
 		this.north = new JPanel();
-		this.keyword = new JTextField();
-		this.keyword.setColumns(30);
+		this.keyword = new JTextField(30);
 		this.type = new JLabel("Geheimalphabet: ");
-		
+
 		this.north.add(type);
 		this.north.add(keyword);
 
@@ -77,10 +82,10 @@ public class View extends JFrame {
 
 		this.encr = new JButton("Verschlüsseln");
 		this.decr = new JButton("Entschlüsseln");
-		
-		this.optionlist.addActionListener(c);
-		this.encr.addActionListener(c);
-		this.decr.addActionListener(c);
+
+		this.optionlist.addActionListener(control);
+		this.encr.addActionListener(control);
+		this.decr.addActionListener(control);
 
 		this.buttons = new JPanel();
 		this.buttons.setLayout(new GridLayout(0, 3));
@@ -100,7 +105,10 @@ public class View extends JFrame {
 		this.setVisible(true);
 
 	}
-	
+
+	/**
+	 * Ändert den Text des Labels entsprechend der ausgewählten Methode
+	 */
 	public void setTextType() {
 		switch (this.optionlist.getSelectedItem().toString()) {
 		case "Substitution":
@@ -112,47 +120,105 @@ public class View extends JFrame {
 		case "Shift":
 			this.type.setText("Verschiebung: ");
 			break;
-			default:
+		default:
 		}
 	}
+
 	/**
-	 * ActionListener des "Encrypt" Buttons
+	 * Initialisiert die Cipher entsprechend der Auswahl und ruft die encrypt() Methode auf
 	 * 
-	 * @param e ActionEvent
+	 * @throws IllegalArgumentException
+	 *             falls der Benutzer ein ungültiges Alphabet, Keyword oder eine
+	 *             ungültige Verschiebungszahl eingegeben hat.
+	 */
+	public void encrypt() throws IllegalArgumentException{
+		switch (this.optionlist.getSelectedItem().toString()) {
+		case "Substitution":
+				this.c = new SubstitutionCipher(this.keyword.getText());
+			break;
+		case "Keyword":
+				this.c = new KeywordCipher(this.keyword.getText());
+			break;
+		case "Shift":
+			try {
+				this.c = new ShiftCipher(Integer.parseInt(this.keyword.getText()));
+			} catch (IllegalArgumentException iae) {
+				JOptionPane.showMessageDialog(null, iae.getMessage());
+			}
+			break;
+		default:
+		}
+		this.output.setText(c.encrypt(this.input.getText()));
+	}
+	
+	/**
+	 * Initialisiert die Cipher entsprechend der Auswahl und ruft die decrypt() Methode auf
+	 * 
+	 * @throws IllegalArgumentException
+	 *             falls der Benutzer ein ungültiges Alphabet, Keyword oder eine
+	 *             ungültige Verschiebungszahl eingegeben hat.
+	 */
+	public void decrypt() throws IllegalArgumentException{
+		switch (this.optionlist.getSelectedItem().toString()){
+		case "Substitution":
+				this.c = new SubstitutionCipher(this.keyword.getText());
+			break;
+		case "Keyword":
+				this.c = new KeywordCipher(this.keyword.getText());
+			break;
+		case "Shift":
+			try {
+				this.c = new ShiftCipher(Integer.parseInt(this.keyword.getText()));
+			} catch (IllegalArgumentException iae) {
+				JOptionPane.showMessageDialog(null, iae.getMessage());
+			}
+			break;
+		default:
+		}
+		this.output.setText(c.decrypt(this.input.getText()));
+	}
+
+	/**
+	 * Prüft ob der "Encrypt" Button gedrückt wurde
+	 * 
+	 * @param e
+	 *            ActionEvent
 	 * @return true falls gedrückt
 	 */
-	public boolean isEncr(ActionEvent e){
-		if(e.getSource() == this.encr){
+	public boolean isEncr(ActionEvent e) {
+		if (e.getSource() == this.encr) {
 			return true;
 		}
 		return false;
 	}
+
 	/**
-	 * Actionlistener des "Decrypt" Buttons
+	 * Prüft ob der "Decrypt" Button gedrückt wurde
 	 * 
-	 * @param e ActionEvent
-	 * @return	true falls gedrückt
+	 * @param e
+	 *            ActionEvent
+	 * @return true falls gedrückt
 	 */
-	
-	public boolean isDecr(ActionEvent e){
-		if(e.getSource() == this.decr){
+
+	public boolean isDecr(ActionEvent e) {
+		if (e.getSource() == this.decr) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
-	 * Actionlistener des "Decrypt" Buttons
+	 * Prüft ob die Auswahl der ComboBox geändert wurde
 	 * 
-	 * @param e ActionEvent
-	 * @return	true falls gedrückt
+	 * @param e
+	 *            ActionEvent
+	 * @return true falls gedrückt
 	 */
-	public boolean isOptionList(ActionEvent e){
-		if(e.getSource() == this.optionlist){
+	public boolean isOptionList(ActionEvent e) {
+		if (e.getSource() == this.optionlist) {
 			return true;
 		}
 		return false;
 	}
-	
 
 }
