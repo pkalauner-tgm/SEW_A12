@@ -3,6 +3,8 @@ package hambergerkalaunerorosz;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -25,8 +27,8 @@ public class View extends JFrame {
 	private JPanel center;
 	private JPanel north;
 
-	private JButton encrypt;
-	private JButton decrypt;
+	private JButton encr;
+	private JButton decr;
 
 	private JTextField keyword;
 
@@ -73,14 +75,17 @@ public class View extends JFrame {
 		String[] options = { "Substitution", "Shift", "Keyword" };
 		this.optionlist = new JComboBox<String>(options);
 
-		this.encrypt = new JButton("Verschlüsseln");
-		this.decrypt = new JButton("Entschlüsseln");
+		this.encr = new JButton("Verschlüsseln");
+		this.decr = new JButton("Entschlüsseln");
+		
+		this.encr.addActionListener(c);
+		this.decr.addActionListener(c);
 
 		this.buttons = new JPanel();
 		this.buttons.setLayout(new GridLayout(0, 3));
-		this.buttons.add(encrypt);
+		this.buttons.add(encr);
 		this.buttons.add(optionlist);
-		this.buttons.add(decrypt);
+		this.buttons.add(decr);
 
 		this.center = new JPanel();
 		this.center.setLayout(new GridLayout(1, 2));
@@ -94,5 +99,30 @@ public class View extends JFrame {
 		this.setVisible(true);
 
 	}
+	/**
+	 * ActionListener des "Encrypt" Buttons
+	 * 
+	 * @param e ActionEvent
+	 * @return true falls gedrückt
+	 */
+	public boolean isEncr(ActionEvent e){
+		if(e.getSource() == this.encr){
+			return true;
+		}
+		return false;
+	}
+	/**
+	 * Actionlistener des "Decrypt" Buttons
+	 * 
+	 * @param e ActionEvent
+	 * @return	true falls gedrückt
+	 */
+	public boolean isDecr(ActionEvent e){
+		if(e.getSource() == this.decr){
+			return true;
+		}
+		return false;
+	}
+	
 
 }
