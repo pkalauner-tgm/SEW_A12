@@ -20,6 +20,7 @@ public class View extends JFrame {
 
 	private JPanel buttons;
 	private JPanel center;
+	private JPanel screen;
 
 	private JButton encrypt;
 	private JButton decrypt;
@@ -38,9 +39,9 @@ public class View extends JFrame {
 	 * @param c
 	 *            Objekt der Control Klasse
 	 */
-	//PARAMETER NICHT VERGESSEN
-	public View(){
-		//this.c = c;
+	
+	public View(Control c){
+		this.c = c;
 		
 		this.setSize(800, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,6 +74,16 @@ public class View extends JFrame {
 		this.center.add(keyword, BorderLayout.NORTH);
 		this.center.add(optionlist, BorderLayout.CENTER);
 		
+		this.screen = new JPanel();
+		this.screen.setLayout(new GridLayout(0,3));
+		this.screen.add(input);
+		this.screen.add(center);
+		this.screen.add(output);
+		
+		this.add(buttons, BorderLayout.SOUTH);
+		this.add(screen, BorderLayout.CENTER);
+	
+		
 		this.setVisible(true);
 		
 		
@@ -81,8 +92,5 @@ public class View extends JFrame {
 		
 		
 	}
-	public static void main(String[] args){
-		new View();
-		
-	}
+	
 }
