@@ -1,5 +1,6 @@
 package hambergerkalaunerorosz;
 
+import java.util.TreeSet;
 
 /**
  * MonoalphabeticCipher
@@ -9,9 +10,7 @@ package hambergerkalaunerorosz;
  */
 public class MonoalphabeticCipher implements Cipher {
 	private String secretAlphabet;
-	private char[] alpha = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-			'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
-			'x', 'y', 'z', 'ä', 'ö', 'ü', 'ß' };
+	private char[] alpha = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'ö', 'ü', 'ß' };
 
 	/**
 	 * Default Konstruktor Geheimalphabet wird auf das Ausgangsalphabet gesetzt
@@ -37,9 +36,30 @@ public class MonoalphabeticCipher implements Cipher {
 	 *            Geheimalphabet
 	 */
 	public void setSecretAlphabet(String secretAlphabet) {
-		if (secretAlphabet.length() != 30) {
+		secretAlphabet.toLowerCase();
+
+		// Überprüfen ob ein gültiges Geheimalphabet angegeben wurde
+		TreeSet<Character> ts = new TreeSet<Character>();
+
+		// Dazu werden alle Buchstaben des angegebenen Geheimalphabets in ein
+		// TreeSet hinzugefügt.
+		for (int i = 0; i < secretAlphabet.length(); i++) {
+			ts.add(secretAlphabet.charAt(i));
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		for (char c : ts) {
+			sb.append(c);
+		}
+		// Da ein TreeSet die chars ordnet, können diese anschließend in einen
+		// String konvertiert und mit dem Ausgangsalphabet verglichen werden
+		// Falls die 2 Alphabete nicht übereinstimmen wird eine
+		// IllegalArgumentException geworfen
+		if (!sb.toString().equals("abcdefghijklmnopqrstuvwxyzßäöü")) {
 			throw new IllegalArgumentException("Ungültiges Alphabet");
 		}
+
 		this.secretAlphabet = secretAlphabet;
 	}
 
@@ -98,9 +118,7 @@ public class MonoalphabeticCipher implements Cipher {
 		char[] arrText = text.toLowerCase().toCharArray();
 
 		for (int i = 0; i < arrText.length; i++) {
-			if ((arrText[i] >= 'a' && arrText[i] <= 'z') || arrText[i] == 'ä'
-					|| arrText[i] == 'ö' || arrText[i] == 'ü'
-					|| arrText[i] == 'ß') {
+			if ((arrText[i] >= 'a' && arrText[i] <= 'z') || arrText[i] == 'ä' || arrText[i] == 'ö' || arrText[i] == 'ü' || arrText[i] == 'ß') {
 				// Diesmal wird mittels indexOf() die Stelle im Geheimalphabet
 				// herausgefunden, da ja diesmal die Reihenfolge nicht bekannt
 				// ist.
