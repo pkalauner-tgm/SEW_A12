@@ -67,16 +67,4 @@ public class ShiftCipher extends MonoalphabeticCipher {
 		}
 		return value;
 	}
-
-	/**
-	 * Testmethode
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Cipher sc = new ShiftCipher(12);
-		String encrypted = sc.encrypt("abcdefghijklmnopqrstuvwxyzäöüß");
-		System.out.println(encrypted);
-		System.out.println(sc.decrypt(encrypted));
-	}
 }

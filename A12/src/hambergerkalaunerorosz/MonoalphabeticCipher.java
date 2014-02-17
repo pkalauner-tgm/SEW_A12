@@ -1,5 +1,6 @@
 package hambergerkalaunerorosz;
 
+
 /**
  * MonoalphabeticCipher
  * 
@@ -36,6 +37,9 @@ public class MonoalphabeticCipher implements Cipher {
 	 *            Geheimalphabet
 	 */
 	public void setSecretAlphabet(String secretAlphabet) {
+		if (secretAlphabet.length() != 30) {
+			throw new IllegalArgumentException("Ungültiges Alphabet");
+		}
 		this.secretAlphabet = secretAlphabet;
 	}
 
@@ -58,11 +62,14 @@ public class MonoalphabeticCipher implements Cipher {
 
 		for (int i = 0; i < arrText.length; i++) {
 			if (arrText[i] >= 'a' && arrText[i] <= 'z') {
-				// [arrText[i] - 'a' berechnet die Stelle des Buchstabens im Alphabet (bzw.im char-Array)
-				// Danach wird der aktuelle Buchstabe auf den dazugehörigen des Geheimalphabet gesetzt
+				// [arrText[i] - 'a' berechnet die Stelle des Buchstabens im
+				// Alphabet (bzw.im char-Array)
+				// Danach wird der aktuelle Buchstabe auf den dazugehörigen des
+				// Geheimalphabet gesetzt
 				arrText[i] = arrSecretAlp[arrText[i] - 'a'];
 			} else {
-				//Umlaute müssen seperat behandelt werden, da die ASCII Codes nicht direkt nach dem normalen Alphabet liegen.
+				// Umlaute müssen seperat behandelt werden, da die ASCII Codes
+				// nicht direkt nach dem normalen Alphabet liegen.
 				switch (arrText[i]) {
 				case 'ä':
 					arrText[i] = arrSecretAlp[26];
@@ -91,9 +98,14 @@ public class MonoalphabeticCipher implements Cipher {
 		char[] arrText = text.toLowerCase().toCharArray();
 
 		for (int i = 0; i < arrText.length; i++) {
-			if ((arrText[i] >= 'a' && arrText[i] <= 'z') || arrText[i] == 'ä' || arrText[i] == 'ö' || arrText[i] == 'ü' || arrText[i] == 'ß') {
-				// Diesmal  wird mittels indexOf() die Stelle im Geheimalphabet herausgefunden, da ja diesmal die Reihenfolge nicht bekannt ist.
-				// Danach wird der aktuelle Buchstabe auf den dazugehörigen des Original-Alphabets gesetzt
+			if ((arrText[i] >= 'a' && arrText[i] <= 'z') || arrText[i] == 'ä'
+					|| arrText[i] == 'ö' || arrText[i] == 'ü'
+					|| arrText[i] == 'ß') {
+				// Diesmal wird mittels indexOf() die Stelle im Geheimalphabet
+				// herausgefunden, da ja diesmal die Reihenfolge nicht bekannt
+				// ist.
+				// Danach wird der aktuelle Buchstabe auf den dazugehörigen des
+				// Original-Alphabets gesetzt
 				arrText[i] = alpha[secretAlphabet.indexOf(arrText[i])];
 			}
 		}

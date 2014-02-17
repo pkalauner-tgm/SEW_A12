@@ -25,10 +25,4 @@ public class KeywordCipher extends MonoalphabeticCipher {
 	public void setKeyword(String keyword) {
 		
 	}
-	
-	public static void main(String[] args) {
-		
-		
-	}
-
 }

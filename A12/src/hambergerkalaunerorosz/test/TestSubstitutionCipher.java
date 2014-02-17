@@ -2,9 +2,16 @@ package hambergerkalaunerorosz.test;
 
 import static org.junit.Assert.*;
 
-public class Test {
+import org.junit.Test;
 
-	@org.junit.Test
+/**
+ * Testklasse für den SubstitutionCipher
+ * @author
+ *
+ */
+public class TestSubstitutionCipher {
+
+	@Test
 	public void test() {
 		fail("Not yet implemented");
 	}

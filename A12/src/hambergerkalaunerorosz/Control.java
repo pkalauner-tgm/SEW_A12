@@ -24,15 +24,6 @@ public class Control implements ActionListener {
 		this.v = new View(this);
 	}
 
-	/**
-	 * Main Methode
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		new Control();
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {

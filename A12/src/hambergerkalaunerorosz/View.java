@@ -142,13 +142,15 @@ public class View extends JFrame {
 		case "Shift":
 			try {
 				this.c = new ShiftCipher(Integer.parseInt(this.keyword.getText()));
-			} catch (IllegalArgumentException iae) {
-				JOptionPane.showMessageDialog(null, iae.getMessage());
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Ungültige Zahl");
 			}
 			break;
 		default:
 		}
-		this.output.setText(c.encrypt(this.input.getText()));
+		if (c != null) {
+			this.output.setText(c.encrypt(this.input.getText()));
+		}
 	}
 	
 	/**
@@ -169,13 +171,15 @@ public class View extends JFrame {
 		case "Shift":
 			try {
 				this.c = new ShiftCipher(Integer.parseInt(this.keyword.getText()));
-			} catch (IllegalArgumentException iae) {
-				JOptionPane.showMessageDialog(null, iae.getMessage());
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Ungültige Zahl");
 			}
 			break;
 		default:
 		}
-		this.output.setText(c.decrypt(this.input.getText()));
+		if (c != null) {
+			this.output.setText(c.decrypt(this.input.getText()));
+		}
 	}
 
 	/**
