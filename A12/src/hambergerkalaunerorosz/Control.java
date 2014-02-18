@@ -15,7 +15,11 @@ import javax.swing.JOptionPane;
 
 public class Control implements ActionListener {
 
-	private View v;
+	/**
+	 * View
+	 * public Accessmodifier für Unittests
+	 */
+	public View v;
 
 	/**
 	 * Konstruktor der Control Klasse

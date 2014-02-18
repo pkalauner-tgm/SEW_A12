@@ -26,20 +26,42 @@ public class View extends JFrame {
 
 	private Control control;
 	private Cipher c;
-	
+
 	private JPanel buttons;
 	private JPanel center;
 	private JPanel north;
 
-	private JButton encr;
-	private JButton decr;
+	/**
+	 * Encrypt-Button public Accessmodifier für Unittests
+	 */
+	public JButton encr;
 
-	private JTextField keyword;
+	/**
+	 * Decrypt-Button public Accessmodifier für Unittests
+	 */
+	public JButton decr;
 
-	private JTextArea input;
-	private JTextArea output;
+	/**
+	 * Textfeld zur Eingabe des Geheimalphabets, Keywords oder der Shiftvalue
+	 * public Accessmodifier für Unittests
+	 */
+	public JTextField keyword;
 
-	private JComboBox<String> optionlist;
+	/**
+	 * Inputtext public Accessmodifier für Unittests
+	 */
+	public JTextArea input;
+
+	/**
+	 * Outputtext public Accessmodifier für Unittests
+	 * 
+	 */
+	public JTextArea output;
+
+	/**
+	 * Auswahl der Verschlüsselungsmethode public Accessmodifier für Unittests
+	 */
+	public JComboBox<String> optionlist;
 
 	private JLabel type;
 
@@ -110,41 +132,44 @@ public class View extends JFrame {
 	 * Ändert den Text des Labels entsprechend der ausgewählten Methode
 	 */
 	public void setTextType() {
-		switch (this.optionlist.getSelectedItem().toString()) {
-		case "Substitution":
+		switch (this.optionlist.getSelectedIndex()) {
+		case 0:
 			this.type.setText("Geheimalphabet: ");
 			break;
-		case "Keyword":
-			this.type.setText("Keyword: ");
-			break;
-		case "Shift":
+		case 1:
 			this.type.setText("Verschiebung: ");
+			break;
+
+		case 2:
+			this.type.setText("Keyword: ");
 			break;
 		default:
 		}
 	}
 
 	/**
-	 * Initialisiert die Cipher entsprechend der Auswahl und ruft die encrypt() Methode auf
+	 * Initialisiert die Cipher entsprechend der Auswahl und ruft die encrypt()
+	 * Methode auf
 	 * 
 	 * @throws IllegalArgumentException
 	 *             falls der Benutzer ein ungültiges Alphabet, Keyword oder eine
 	 *             ungültige Verschiebungszahl eingegeben hat.
 	 */
-	public void encrypt() throws IllegalArgumentException{
-		switch (this.optionlist.getSelectedItem().toString()) {
-		case "Substitution":
-				this.c = new SubstitutionCipher(this.keyword.getText());
+	public void encrypt() throws IllegalArgumentException {
+		switch (this.optionlist.getSelectedIndex()) {
+		case 0:
+			this.c = new SubstitutionCipher(this.keyword.getText());
 			break;
-		case "Keyword":
-				this.c = new KeywordCipher(this.keyword.getText());
-			break;
-		case "Shift":
+		case 1:
 			try {
 				this.c = new ShiftCipher(Integer.parseInt(this.keyword.getText()));
 			} catch (NumberFormatException e) {
 				JOptionPane.showMessageDialog(null, "Ungültige Zahl");
 			}
+			break;
+
+		case 2:
+			this.c = new KeywordCipher(this.keyword.getText());
 			break;
 		default:
 		}
@@ -152,28 +177,30 @@ public class View extends JFrame {
 			this.output.setText(c.encrypt(this.input.getText()));
 		}
 	}
-	
+
 	/**
-	 * Initialisiert die Cipher entsprechend der Auswahl und ruft die decrypt() Methode auf
+	 * Initialisiert die Cipher entsprechend der Auswahl und ruft die decrypt()
+	 * Methode auf
 	 * 
 	 * @throws IllegalArgumentException
 	 *             falls der Benutzer ein ungültiges Alphabet, Keyword oder eine
 	 *             ungültige Verschiebungszahl eingegeben hat.
 	 */
-	public void decrypt() throws IllegalArgumentException{
-		switch (this.optionlist.getSelectedItem().toString()){
-		case "Substitution":
-				this.c = new SubstitutionCipher(this.keyword.getText());
+	public void decrypt() throws IllegalArgumentException {
+		switch (this.optionlist.getSelectedIndex()) {
+		case 0:
+			this.c = new SubstitutionCipher(this.keyword.getText());
 			break;
-		case "Keyword":
-				this.c = new KeywordCipher(this.keyword.getText());
-			break;
-		case "Shift":
+		case 1:
 			try {
 				this.c = new ShiftCipher(Integer.parseInt(this.keyword.getText()));
 			} catch (NumberFormatException e) {
 				JOptionPane.showMessageDialog(null, "Ungültige Zahl");
 			}
+			break;
+
+		case 2:
+			this.c = new KeywordCipher(this.keyword.getText());
 			break;
 		default:
 		}
