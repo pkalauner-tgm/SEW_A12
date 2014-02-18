@@ -25,6 +25,8 @@ public class Control implements ActionListener {
 	 * Konstruktor der Control Klasse
 	 */
 	public Control() {
+		JOptionPane.showMessageDialog(null, "Herzlich Willkommen beim SuperCipher!!\n"
+				+ "Bitte beachten Sie, dass der Output zum Entschlüsseln wieder in den Input kopiert werden muss. ");
 		this.v = new View(this);
 	}
 
