@@ -29,12 +29,13 @@ public class KeywordCipher extends MonoalphabeticCipher {
 		if (keyword.length() > 30) {
 			throw new IllegalArgumentException("Das Keyword darf maximal 30 Zeichen lang sein");
 		}
-		this.keyword = keyword.toLowerCase();
 		LinkedHashSet<Character> lhs = new LinkedHashSet<Character>();
 		
+		this.keyword = keyword.toLowerCase();
+		
 		// Fügt alle Buchstaben des Keywords zum Set hinzu
-		for (int i = 0; i < this.keyword.length(); i++) {
-			lhs.add(this.keyword.charAt(i));
+		for (char c : this.keyword.toCharArray()) {
+			lhs.add(c);
 		}
 		
 		// Fügt die restlichen Buchstaben des Alphabets zum Set hinzu
@@ -51,16 +52,4 @@ public class KeywordCipher extends MonoalphabeticCipher {
 		}
 		super.setSecretAlphabet(sb.toString());
 	}
-
-	/**
-	 * Testmethode
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Cipher kc = new KeywordCipher("keyword");
-		String encrypted = kc.encrypt("abcdefghijklmnopqrstuvwxyzäöüß");
-		System.out.println(encrypted);
-		System.out.println(kc.decrypt(encrypted));
-	}
-
 }
