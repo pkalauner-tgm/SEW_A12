@@ -6,7 +6,7 @@ import org.junit.Test;
 
 /**
  * Testklasse für dens ShiftCipher
- * @author
+ * @author Philip Orosz
  *
  */
 public class TestShiftCipher {

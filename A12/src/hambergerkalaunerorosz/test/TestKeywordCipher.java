@@ -6,7 +6,7 @@ import org.junit.Test;
 
 /**
  * Testklasse für den KeywordCipher
- * @author
+ * @author Philip Orosz
  *
  */
 public class TestKeywordCipher {

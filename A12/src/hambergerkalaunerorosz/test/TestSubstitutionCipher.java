@@ -6,7 +6,7 @@ import org.junit.Test;
 
 /**
  * Testklasse für den SubstitutionCipher
- * @author
+ * @author Gregor Hamberger
  *
  */
 public class TestSubstitutionCipher {

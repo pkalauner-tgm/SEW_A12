@@ -6,7 +6,7 @@ import org.junit.Test;
 
 /**
  * Testklasse für den MonoalpabeticCipher
- * @author
+ * @author Gregor Hamberger
  *
  */
 public class TestMonoalphabeticCipher {
