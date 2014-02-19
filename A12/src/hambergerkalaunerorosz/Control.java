@@ -2,6 +2,8 @@ package hambergerkalaunerorosz;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JOptionPane;
 
@@ -13,7 +15,7 @@ import javax.swing.JOptionPane;
  * 
  */
 
-public class Control implements ActionListener {
+public class Control implements ActionListener, KeyListener {
 
 	/**
 	 * View
@@ -45,5 +47,25 @@ public class Control implements ActionListener {
 			v.setTextType();
 		}
 
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if (v.getIndex() == 2 && v.getKeyWordText().indexOf(e.getKeyChar())!=-1) {
+			JOptionPane.showMessageDialog(null, "Das Keyword sollte zu Ihrer eigenen Sicherheit keine doppelten Buchstaben haben!");
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -112,7 +112,8 @@ public class View extends JFrame {
 		this.optionlist.addActionListener(control);
 		this.encr.addActionListener(control);
 		this.decr.addActionListener(control);
-
+		this.keyword.addKeyListener(control);
+		
 		this.buttons = new JPanel();
 		this.buttons.setLayout(new GridLayout(0, 3));
 		this.buttons.add(encr);
@@ -211,7 +212,23 @@ public class View extends JFrame {
 			break;
 		}
 	}
-
+	
+	/**
+	 * gets KeywordText
+	 * @return keyword text
+	 */
+	public String getKeyWordText() {
+		return this.keyword.getText();
+	}
+	
+	/**
+	 * gets Index
+	 * @return index
+	 */
+	public int getIndex() {
+		return this.optionlist.getSelectedIndex();
+	}
+	
 	/**
 	 * Prüft ob der "Encrypt" Button gedrückt wurde
 	 * 
