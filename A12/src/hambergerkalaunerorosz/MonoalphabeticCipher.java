@@ -37,7 +37,10 @@ public class MonoalphabeticCipher implements Cipher {
 	 */
 	public void setSecretAlphabet(String secretAlphabet) {
 		secretAlphabet.toLowerCase();
-
+		if (secretAlphabet.length() != 30) {
+			throw new IllegalArgumentException("Ungültiges Alphabet");
+		}
+		
 		// Überprüfen ob ein gültiges Geheimalphabet angegeben wurde
 		TreeSet<Character> ts = new TreeSet<Character>();
 
