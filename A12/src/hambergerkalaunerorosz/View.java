@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -119,8 +120,8 @@ public class View extends JFrame {
 
 		this.center = new JPanel();
 		this.center.setLayout(new GridLayout(1, 2));
-		this.center.add(input);
-		this.center.add(output);
+		this.center.add(new JScrollPane(input));
+		this.center.add(new JScrollPane(output));
 
 		this.add(north, BorderLayout.NORTH);
 		this.add(center, BorderLayout.CENTER);
