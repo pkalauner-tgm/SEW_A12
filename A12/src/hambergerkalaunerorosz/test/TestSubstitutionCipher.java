@@ -1,7 +1,6 @@
 package hambergerkalaunerorosz.test;
 
-import static org.junit.Assert.*;
-import hambergerkalaunerorosz.MonoalphabeticCipher;
+import static org.junit.Assert.assertEquals;
 import hambergerkalaunerorosz.SubstitutionCipher;
 
 import org.junit.Test;
@@ -11,6 +10,7 @@ import org.junit.Test;
  * @author Gregor Hamberger
  *
  */
+@SuppressWarnings("javadoc")
 public class TestSubstitutionCipher {
 
 	// Testfälle - Richtiges erwartet
@@ -34,36 +34,36 @@ public class TestSubstitutionCipher {
 	//Zu kurzes Alphabet
 	@Test (expected=IllegalArgumentException.class)
 	public void alpha3() {
-		SubstitutionCipher a = new SubstitutionCipher("abcdefghijklmnopqrstuvwxyzäüö");
+		new SubstitutionCipher("abcdefghijklmnopqrstuvwxyzäüö");
 	}
 
 	//Zu langes Alphabet
 	@Test (expected=IllegalArgumentException.class)
 	public void alpha4() {
-		SubstitutionCipher a = new SubstitutionCipher("abcdefghijklmnopqrstuvwxyzäüößa");
+		 new SubstitutionCipher("abcdefghijklmnopqrstuvwxyzäüößa");
 	}
 
 	//Alphabet mit Zahlen - Anfang
 	@Test (expected=IllegalArgumentException.class)
 	public void alpha5() {
-		SubstitutionCipher a = new SubstitutionCipher("5bcdefghijklmnopqrstuvwxyzäüöß");
+		new SubstitutionCipher("5bcdefghijklmnopqrstuvwxyzäüöß");
 	}
 
 	//Alphabet mit Zahlen - Mitte
 	@Test (expected=IllegalArgumentException.class)
 	public void alpha6() {
-		SubstitutionCipher a = new SubstitutionCipher("abcdefghijklm5opqrstuvwxyzäüöß");
+		new SubstitutionCipher("abcdefghijklm5opqrstuvwxyzäüöß");
 	}
 
 	//Alphabet mit Zahlen - Ende
 	@Test (expected=IllegalArgumentException.class)
 	public void alpha7() {
-		SubstitutionCipher a = new SubstitutionCipher("abcdefghijklmnopqrstuvwxyzäüö4");
+		new SubstitutionCipher("abcdefghijklmnopqrstuvwxyzäüö4");
 	}
 
 	//Alphabet mit anderem ungültigen Zeichen
 	@Test (expected=IllegalArgumentException.class)
 	public void alpha8() {
-		SubstitutionCipher a = new SubstitutionCipher("abcdefghijklmn&pqrstuvwxyzäüöß");
+		new SubstitutionCipher("abcdefghijklmn&pqrstuvwxyzäüöß");
 	}
 }

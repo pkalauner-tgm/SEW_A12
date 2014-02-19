@@ -1,8 +1,7 @@
 package hambergerkalaunerorosz.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import hambergerkalaunerorosz.MonoalphabeticCipher;
-import hambergerkalaunerorosz.SubstitutionCipher;
 
 import org.junit.Test;
 
@@ -11,6 +10,7 @@ import org.junit.Test;
  * @author Gregor Hamberger
  *
  */
+@SuppressWarnings("javadoc")
 public class TestMonoalphabeticCipher {
 
 
