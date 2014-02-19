@@ -25,7 +25,9 @@ public class View extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private Control control;
-	private Cipher c;
+	private SubstitutionCipher substC;
+	private ShiftCipher shiftC;
+	private KeywordCipher keyC;
 
 	private JPanel buttons;
 	private JPanel center;
@@ -73,13 +75,13 @@ public class View extends JFrame {
 	 */
 
 	public View(Control c) {
+		super("SuperCipher");
 		this.control = c;
 
 		this.setSize(800, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		this.setLocationRelativeTo(null);
-		this.setTitle("SuperCipher");
 
 		this.north = new JPanel();
 		this.keyword = new JTextField(30);
@@ -124,6 +126,10 @@ public class View extends JFrame {
 		this.add(center, BorderLayout.CENTER);
 		this.add(buttons, BorderLayout.SOUTH);
 
+		this.shiftC = new ShiftCipher(0);
+		this.substC = new SubstitutionCipher("abcdefghijklmnopqrstuvwxyzäöüß");
+		this.keyC = new KeywordCipher("keyword");
+		
 		this.setVisible(true);
 
 	}
@@ -143,7 +149,6 @@ public class View extends JFrame {
 		case 2:
 			this.type.setText("Keyword: ");
 			break;
-		default:
 		}
 	}
 
@@ -158,23 +163,21 @@ public class View extends JFrame {
 	public void encrypt() throws IllegalArgumentException {
 		switch (this.optionlist.getSelectedIndex()) {
 		case 0:
-			this.c = new SubstitutionCipher(this.keyword.getText());
+			this.substC.setSecretAlphabet(this.keyword.getText());
+			this.output.setText(substC.encrypt(this.input.getText()));
 			break;
 		case 1:
 			try {
-				this.c = new ShiftCipher(Integer.parseInt(this.keyword.getText()));
+				this.shiftC.setShiftAmount(Integer.parseInt(this.keyword.getText()));
+				this.output.setText(shiftC.encrypt(this.input.getText()));
 			} catch (NumberFormatException e) {
 				JOptionPane.showMessageDialog(null, "Ungültige Zahl");
 			}
 			break;
-
 		case 2:
-			this.c = new KeywordCipher(this.keyword.getText());
+			this.keyC.setKeyword(this.keyword.getText());
+			this.output.setText(keyC.encrypt(this.input.getText()));
 			break;
-		default:
-		}
-		if (c != null) {
-			this.output.setText(c.encrypt(this.input.getText()));
 		}
 	}
 
@@ -189,23 +192,21 @@ public class View extends JFrame {
 	public void decrypt() throws IllegalArgumentException {
 		switch (this.optionlist.getSelectedIndex()) {
 		case 0:
-			this.c = new SubstitutionCipher(this.keyword.getText());
+			this.substC.setSecretAlphabet(this.keyword.getText());
+			this.output.setText(substC.decrypt(this.input.getText()));
 			break;
 		case 1:
 			try {
-				this.c = new ShiftCipher(Integer.parseInt(this.keyword.getText()));
+				this.shiftC.setShiftAmount(Integer.parseInt(this.keyword.getText()));
+				this.output.setText(shiftC.decrypt(this.input.getText()));
 			} catch (NumberFormatException e) {
 				JOptionPane.showMessageDialog(null, "Ungültige Zahl");
 			}
 			break;
-
 		case 2:
-			this.c = new KeywordCipher(this.keyword.getText());
+			this.keyC.setKeyword(this.keyword.getText());
+			this.output.setText(keyC.decrypt(this.input.getText()));
 			break;
-		default:
-		}
-		if (c != null) {
-			this.output.setText(c.decrypt(this.input.getText()));
 		}
 	}
 
