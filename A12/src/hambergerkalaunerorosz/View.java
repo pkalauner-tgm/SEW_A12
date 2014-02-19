@@ -86,7 +86,7 @@ public class View extends JFrame {
 
 		this.north = new JPanel();
 		this.keyword = new JTextField(30);
-		this.type = new JLabel("Geheimalphabet: ");
+		this.type = new JLabel("Verschiebung: ");
 
 		this.north.add(type);
 		this.north.add(keyword);
@@ -104,6 +104,7 @@ public class View extends JFrame {
 
 		String[] options = { "Substitution", "Shift", "Keyword" };
 		this.optionlist = new JComboBox<String>(options);
+		this.optionlist.setSelectedIndex(1);
 
 		this.encr = new JButton("Verschlüsseln");
 		this.decr = new JButton("Entschlüsseln");
